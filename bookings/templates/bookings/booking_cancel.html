@@ -1,0 +1,29 @@
+{% extends 'computers/base.html' %}
+
+{% block title %}Отмена бронирования{% endblock %}
+
+{% block content %}
+<div style="background:#1a1a2e; padding:25px; border-radius:10px; max-width:500px;">
+    <h1 style="color:#e74c3c; margin-bottom:20px;">❌ Отменить бронирование?</h1>
+    <p><b>Компьютер:</b> {{ booking.computer.name }}</p>
+    <p><b>Зона:</b> {{ booking.computer.get_zone_display }}</p>
+    <p><b>Дата:</b> {{ booking.date }}</p>
+    <p><b>Время:</b> {{ booking.start_time }} — {{ booking.end_time }}</p>
+    <p><b>Стоимость:</b> {{ booking.total_price }} сом</p>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" style="
+            margin-top:20px;
+            width:100%;
+            padding:12px;
+            background:#e74c3c;
+            color:white;
+            border:none;
+            border-radius:6px;
+            font-size:16px;
+            cursor:pointer;
+        ">Да, отменить</button>
+    </form>
+    <a href="/bookings/my/" style="display:block; text-align:center; margin-top:10px; color:#aaa;">← Назад</a>
+</div>
+{% endblock %}

@@ -24,6 +24,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', lambda request: redirect('computer_list')),
     path('computers/', include('computers.urls')),
-    # path('bookings/', include('bookings.urls')),
-    # path('accounts/', include('accounts.urls')),
+    path('bookings/', include('bookings.urls')),
+    path('accounts/', include('accounts.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
