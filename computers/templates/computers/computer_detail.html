@@ -1,0 +1,39 @@
+{% extends 'computers/base.html' %}
+
+{% block title %}{{ computer.name }}{% endblock %}
+
+{% block content %}
+<a href="/computers/" style="color:#7c3aed; text-decoration:none;">← Все компьютеры</a>
+<br><br>
+<div style="background:#1a1a2e; border-radius:10px; overflow:hidden; max-width:700px;">
+    {% if computer.image %}
+        <img src="{{ computer.image.url }}" style="width:100%; height:350px; object-fit:cover;">
+    {% else %}
+        <div style="height:250px; background:#2a2a3e; display:flex; align-items:center; justify-content:center; font-size:80px;">🖥️</div>
+    {% endif %}
+    <div style="padding:25px;">
+        <h1 style="color:#7c3aed;">{{ computer.name }}</h1>
+        <p style="color:#7c3aed; margin:5px 0;">{{ computer.get_zone_display }}</p>
+        <br>
+        <p>🔧 CPU: {{ computer.cpu }}</p>
+        <p>🎮 GPU: {{ computer.gpu }}</p>
+        <p>💾 RAM: {{ computer.ram }} ГБ</p>
+        <br>
+        <p style="color:#7c3aed; font-size:26px; font-weight:bold;">{{ computer.price_per_hour }} сом/час</p>
+        <br>
+        {% if computer.is_available %}
+            <a href="/bookings/create/{{ computer.pk }}/" style="
+                display:inline-block;
+                padding: 12px 25px;
+                background: #7c3aed;
+                color: white;
+                border-radius: 8px;
+                text-decoration: none;
+                font-size: 16px;
+            ">🖥️ Забронировать</a>
+        {% else %}
+            <p style="color:#e74c3c; font-size:18px;">❌ Компьютер недоступен</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

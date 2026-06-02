@@ -1,0 +1,47 @@
+{% extends 'computers/base.html' %}
+
+{% block title %}Бронирование — {{ computer.name }}{% endblock %}
+
+{% block content %}
+<a href="/computers/{{ computer.pk }}/" style="color:#7c3aed; text-decoration:none;">← {{ computer.name }}</a>
+<br><br>
+<div style="background:#1a1a2e; padding:25px; border-radius:10px; max-width:500px;">
+    <h1 style="color:#7c3aed; margin-bottom:20px;">🖥️ Бронирование</h1>
+
+    <div style="background:#2a2a3e; padding:15px; border-radius:8px; margin-bottom:20px;">
+        <p><b>Компьютер:</b> {{ computer.name }}</p>
+        <p><b>Зона:</b> {{ computer.get_zone_display }}</p>
+        <p><b>CPU:</b> {{ computer.cpu }}</p>
+        <p><b>GPU:</b> {{ computer.gpu }}</p>
+        <p style="color:#7c3aed; font-weight:bold; margin-top:8px;">{{ computer.price_per_hour }} сом/час</p>
+    </div>
+
+    {% if form.non_field_errors %}
+        <div style="background:#c0392b; padding:12px; border-radius:6px; margin-bottom:15px;">
+            ⚠️ {{ form.non_field_errors.0 }}
+        </div>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+            <label style="display:block; margin:15px 0 5px; color:#aaa;">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}
+                <p style="color:#e74c3c;">{{ field.errors }}</p>
+            {% endif %}
+        {% endfor %}
+        <button type="submit" style="
+            margin-top:20px;
+            width:100%;
+            padding:12px;
+            background:#7c3aed;
+            color:white;
+            border:none;
+            border-radius:6px;
+            font-size:16px;
+            cursor:pointer;
+        ">🖥️ Забронировать</button>
+    </form>
+</div>
+{% endblock %}
