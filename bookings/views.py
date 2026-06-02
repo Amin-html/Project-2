@@ -15,7 +15,7 @@ def booking_create(request, computer_pk):
             start_time = form.cleaned_data['start_time']
             end_time = form.cleaned_data['end_time']
 
-            # проверяем пересечение времени
+            # Правильная проверка пересечения интервалов времени
             conflict = Booking.objects.filter(
                 computer=computer,
                 date=date,
@@ -53,7 +53,3 @@ def booking_cancel(request, pk):
         booking.delete()
         return redirect('my_bookings')
     return render(request, 'bookings/booking_cancel.html', {'booking': booking})
-# Create your views here.
-
-
-# Acho Amin
