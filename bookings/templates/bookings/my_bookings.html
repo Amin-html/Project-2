@@ -11,7 +11,9 @@
         <p style="color:#7c3aed; font-size:20px; font-weight:bold;">{{ booking.computer.name }}</p>
         <p style="color:#aaa; margin:5px 0;">🏷️ {{ booking.computer.get_zone_display }}</p>
         <p style="color:#aaa; margin:5px 0;">📅 {{ booking.date }}</p>
-        <p style="color:#aaa; margin:5px 0;">⏰ {{ booking.start_time }} — {{ booking.end_time }}</p>
+        <p style="color:#aaa; margin:5px 0;">
+        ⏰ {{ booking.start_time|time:"H:i" }} — {{ booking.end_time|time:"H:i" }}
+        </p>
         <p style="color:#7c3aed; font-size:20px; font-weight:bold; margin-top:10px;">{{ booking.total_price }} сом</p>
         <a href="/bookings/cancel/{{ booking.pk }}/" style="
             display:inline-block;
